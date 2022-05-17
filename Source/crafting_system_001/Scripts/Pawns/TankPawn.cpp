@@ -1,6 +1,7 @@
 #include "TankPawn.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "ResourceComponent.h"
 
 // Sets default values
 ATankPawn::ATankPawn()
@@ -44,6 +45,9 @@ void ATankPawn::SetupPlayerInputComponent(UInputComponent* aPlayerInputComponent
 	aPlayerInputComponent->BindAxis("Horizontal", this, &ATankPawn::CalculateRotationInput);
 
 	aPlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ATankPawn::Fire);
+
+	aPlayerInputComponent->BindAction("TestA", IE_Pressed, this, &ATankPawn::AddTestResource);
+	aPlayerInputComponent->BindAction("TestB", IE_Pressed, this, &ATankPawn::MinusTestResource);
 }
 
 void ATankPawn::InitComponents()
@@ -55,6 +59,9 @@ void ATankPawn::InitComponents()
 	check(mCamera == nullptr);
 	mCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	mCamera->SetupAttachment(mSpringArm);
+
+	check(mResourceComponent == nullptr);
+	mResourceComponent = CreateDefaultSubobject<UResourceComponent>(TEXT("Resource"));
 }
 
 void ATankPawn::InitPlayerController()
@@ -102,4 +109,18 @@ void ATankPawn::RotateTurretToMouseCursorLocation()
 
 	//TODO - If we do not get a hitResult, the turret does not follow the mouse. So! we need to add an extra bit of code to handle that
 	//I know how to do this in Unity with raycasting, so its just a matter of figuring out how to do it here...
+}
+
+void ATankPawn::AddTestResource()
+{
+	if (mResourceComponent == nullptr) return;
+
+	mResourceComponent->AddTestResource();
+}
+
+void ATankPawn::MinusTestResource()
+{
+	if (mResourceComponent == nullptr) return;
+
+	mResourceComponent->MinusTestResource();
 }

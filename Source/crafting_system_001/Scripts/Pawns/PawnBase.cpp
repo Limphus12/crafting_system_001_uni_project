@@ -36,7 +36,15 @@ void APawnBase::Fire()
 
 void APawnBase::HandleDestruction()
 {
+	//Turret Destruction will hide the meshes (inc. disable collisions), wait a certain amount of time, then un-hide (inc. re-enable collisions).
 
+	//hide meshes
+
+	//disable collisions
+
+	//drop resources
+
+	//start timer
 }
 
 // Called every frame

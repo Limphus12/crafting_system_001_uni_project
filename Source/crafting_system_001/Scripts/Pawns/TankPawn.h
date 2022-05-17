@@ -5,6 +5,7 @@
 class APlayerController;
 class USpringArmComponent;
 class UCameraComponent;
+class UResourceComponent;
 
 UCLASS()
 class CRAFTING_SYSTEM_001_API ATankPawn : public APawnBase
@@ -74,4 +75,12 @@ private:
 		Category = "Movement",
 		meta = (AllowPrivateAccess = "true"))
 	float mRotationSpeed = 60.0f; //Seems to be in degrees per second.
+
+
+
+	//Resources
+	void AddTestResource();
+	void MinusTestResource();
+
+	UResourceComponent* mResourceComponent = nullptr;
 };
