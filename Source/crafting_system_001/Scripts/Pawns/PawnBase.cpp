@@ -39,12 +39,32 @@ void APawnBase::HandleDestruction()
 	//Turret Destruction will hide the meshes (inc. disable collisions), wait a certain amount of time, then un-hide (inc. re-enable collisions).
 
 	//hide meshes
+	mBaseMesh->bHiddenInGame = true;
+	mTurretMesh->bHiddenInGame = true;
+	mBarrelMesh->bHiddenInGame = true;
 
 	//disable collisions
+	mBaseMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	mTurretMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	mBarrelMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	//drop resources
 
 	//start timer
+
+}
+
+void APawnBase::HandleRespawn()
+{
+	//show meshes
+	mBaseMesh->bHiddenInGame = false;
+	mTurretMesh->bHiddenInGame = false;
+	mBarrelMesh->bHiddenInGame = false;
+
+	//enable collisions
+	mBaseMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	mTurretMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	mBarrelMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }
 
 // Called every frame

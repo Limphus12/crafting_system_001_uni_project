@@ -1,6 +1,8 @@
 #include "HealthComponent.h"
 #include "PawnBase.h"
 
+class APawnBase;
+
 // Sets default values for this component's properties
 UHealthComponent::UHealthComponent()
 {
@@ -54,14 +56,16 @@ void UHealthComponent::RespawnPlayer(AActor* actor)
 
 void UHealthComponent::RespawnTurret(AActor* actor)
 {
-	//hide the turret
+
 
 	/*
-	APawnBase* apb = actor->FindComponentByClass<APawnBase>();
+	//APawnBase* apb = actor->FindComponentByClass<APawnBase>();
+
+	//APawnBase* apb = actor->FindComponentByClass(<APawnBase>);
 
 	if (apb != nullptr)
 	{
-
+		apb->HandleDestruction();
 	}
 
 	else if (apb == nullptr) UE_LOG(LogTemp, Warning, TEXT("Cannot find APawnBase on this Actor"));
@@ -74,7 +78,7 @@ void UHealthComponent::RespawnTurret(AActor* actor)
 	
 
 	//Reset the turret's health.
-	ResetHealth();
+	//ResetHealth();
 }
 
 void UHealthComponent::ResetHealth()
