@@ -25,7 +25,6 @@ void AResourceTriggerBox::OnOverlapBegin(class AActor* OverlappedActor, class AA
 		//check if teh otehr actor is the player tank
 
 
-
 		//if so, add some resources and delete thyself
 	}
 }

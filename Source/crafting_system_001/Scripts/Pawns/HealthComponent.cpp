@@ -56,8 +56,6 @@ void UHealthComponent::RespawnPlayer(AActor* actor)
 
 void UHealthComponent::RespawnTurret(AActor* actor)
 {
-
-
 	/*
 	//APawnBase* apb = actor->FindComponentByClass<APawnBase>();
 

@@ -20,5 +20,4 @@ public:
 
 	UFUNCTION()
 		void OnOverlapEnd(class AActor* OverlappedActor, class AActor* OtherActor);
-
 };
