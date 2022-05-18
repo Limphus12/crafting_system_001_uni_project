@@ -18,6 +18,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	//Resources
+	void AddTestResource(int aAmount);
+	void MinusTestResource(int aAmount);
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -75,12 +79,6 @@ private:
 		Category = "Movement",
 		meta = (AllowPrivateAccess = "true"))
 	float mRotationSpeed = 60.0f; //Seems to be in degrees per second.
-
-
-
-	//Resources
-	void AddTestResource();
-	void MinusTestResource();
 
 	UResourceComponent* mResourceComponent = nullptr;
 };

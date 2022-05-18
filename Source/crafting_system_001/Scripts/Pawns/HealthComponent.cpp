@@ -56,10 +56,8 @@ void UHealthComponent::RespawnPlayer(AActor* actor)
 
 void UHealthComponent::RespawnTurret(AActor* actor)
 {
-	/*
-	//APawnBase* apb = actor->FindComponentByClass<APawnBase>();
-
-	//APawnBase* apb = actor->FindComponentByClass(<APawnBase>);
+	//grab the APawnBase Class via Cast
+	APawnBase* apb = Cast<APawnBase>(actor);
 
 	if (apb != nullptr)
 	{
@@ -67,16 +65,9 @@ void UHealthComponent::RespawnTurret(AActor* actor)
 	}
 
 	else if (apb == nullptr) UE_LOG(LogTemp, Warning, TEXT("Cannot find APawnBase on this Actor"));
-	*/
-
-	//start a timer
-
-
-	//unhide after the timer
-	
 
 	//Reset the turret's health.
-	//ResetHealth();
+	ResetHealth();
 }
 
 void UHealthComponent::ResetHealth()

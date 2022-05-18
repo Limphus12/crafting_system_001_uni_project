@@ -20,4 +20,10 @@ public:
 
 	UFUNCTION()
 		void OnOverlapEnd(class AActor* OverlappedActor, class AActor* OtherActor);
+
+	void SetTestResourceAmount(int aAmount);
+
+	//Resources
+	UPROPERTY(EditAnywhere, Category = "Resources")
+		int mTestResourceAmount = 0;
 };

@@ -46,8 +46,8 @@ void ATankPawn::SetupPlayerInputComponent(UInputComponent* aPlayerInputComponent
 
 	aPlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ATankPawn::Fire);
 
-	aPlayerInputComponent->BindAction("TestA", IE_Pressed, this, &ATankPawn::AddTestResource);
-	aPlayerInputComponent->BindAction("TestB", IE_Pressed, this, &ATankPawn::MinusTestResource);
+	//aPlayerInputComponent->BindAction("TestA", IE_Pressed, this, &ATankPawn::AddTestResource());
+	//aPlayerInputComponent->BindAction("TestB", IE_Pressed, this, &ATankPawn::MinusTestResource());
 }
 
 void ATankPawn::InitComponents()
@@ -111,16 +111,16 @@ void ATankPawn::RotateTurretToMouseCursorLocation()
 	//I know how to do this in Unity with raycasting, so its just a matter of figuring out how to do it here...
 }
 
-void ATankPawn::AddTestResource()
+void ATankPawn::AddTestResource(int aAmount)
 {
 	if (mResourceComponent == nullptr) return;
 
-	mResourceComponent->AddTestResource();
+	mResourceComponent->AddTestResource(aAmount);
 }
 
-void ATankPawn::MinusTestResource()
+void ATankPawn::MinusTestResource(int aAmount)
 {
 	if (mResourceComponent == nullptr) return;
 
-	mResourceComponent->MinusTestResource();
+	mResourceComponent->MinusTestResource(aAmount);
 }

@@ -1,5 +1,6 @@
 #include "ResourceTriggerBox.h"
 #include "DrawDebugHelpers.h"
+#include "crafting_system_001/Scripts/Pawns/TankPawn.h"
 
 class ATankPawn;
 
@@ -13,6 +14,9 @@ void AResourceTriggerBox::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//Sizing up the actor, so that it is easier to get the resource.
+	SetActorScale3D(FVector(5, 5, 5));
+
 	DrawDebugBox(GetWorld(), GetActorLocation(), GetComponentsBoundingBox().GetExtent(), FColor::Purple, true, -1, 0, 5);
 }
 
@@ -20,12 +24,17 @@ void AResourceTriggerBox::OnOverlapBegin(class AActor* OverlappedActor, class AA
 {
 	if (OtherActor && (OtherActor != this))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Overlap Begin"));
+		//UE_LOG(LogTemp, Warning, TEXT("Overlap Begin"));
 
-		//check if teh otehr actor is the player tank
+		//Grab the TankPawn class, to ensure the OtherActor is the player
+		ATankPawn* atp = Cast<ATankPawn>(OtherActor);
 
+		if (atp != nullptr)
+		{
+			atp->AddTestResource(mTestResourceAmount);
 
-		//if so, add some resources and delete thyself
+			Destroy();
+		}
 	}
 }
 
@@ -33,6 +42,11 @@ void AResourceTriggerBox::OnOverlapEnd(class AActor* OverlappedActor, class AAct
 {
 	if (OtherActor && (OtherActor != this))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Overlap End"));
+		//UE_LOG(LogTemp, Warning, TEXT("Overlap End"));
 	}
+}
+
+void AResourceTriggerBox::SetTestResourceAmount(int aAmount)
+{
+	mTestResourceAmount = aAmount;
 }

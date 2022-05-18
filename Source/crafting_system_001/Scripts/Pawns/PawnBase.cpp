@@ -1,6 +1,7 @@
 #include "PawnBase.h"
 #include "Components/CapsuleComponent.h"
 #include "crafting_system_001/Scripts/Actors/ProjectileBase.h"
+#include "crafting_system_001/Scripts/Actors/ResourceTriggerBox.h"
 
 // Sets default values
 APawnBase::APawnBase()
@@ -36,41 +37,83 @@ void APawnBase::Fire()
 
 void APawnBase::HandleDestruction()
 {
+	//UE_LOG(LogTemp, Warning, TEXT("Calling HandleDestruction"));
+
 	//Turret Destruction will hide the meshes (inc. disable collisions), wait a certain amount of time, then un-hide (inc. re-enable collisions).
 
-	//hide meshes
-	mBaseMesh->bHiddenInGame = true;
-	mTurretMesh->bHiddenInGame = true;
-	mBarrelMesh->bHiddenInGame = true;
+	//Hide Actor
+	SetActorHiddenInGame(true);
 
-	//disable collisions
-	mBaseMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	mTurretMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	mBarrelMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//Disable Collisions
+	SetActorEnableCollision(false);
 
-	//drop resources
+	//Drop Resources
+	SpawnResources();
 
-	//start timer
+	//Start Timer
+	if (!bTimer) StartTimer();
+}
 
+void APawnBase::SpawnResources()
+{
+	FVector mSpawnLocation = GetActorLocation();
+	FRotator mSpawnRotation = GetActorRotation();
+
+	AResourceTriggerBox* artb = GetWorld()->SpawnActor<AResourceTriggerBox>(mSpawnLocation, mSpawnRotation);
+
+	if (artb != nullptr)
+	{
+		artb->SetTestResourceAmount(mTestResourceAmount);
+	}
+}
+
+void APawnBase::StartTimer()
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Calling StartTimer"));
+
+	bTimer = true;
+}
+
+void APawnBase::Timer(float i)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Calling Timer"));
+
+	//adding on passed-through float value (deltatime)
+	mTimerCount += i;
+
+	//if the timer goes over our respawn time, call reset timer.
+	if (mTimerCount >= mTimeToRespawn)
+	{
+		ResetTimer();
+	}
+}
+
+void APawnBase::ResetTimer()
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Calling ResetTimer"));
+
+	bTimer = false;
+
+	mTimerCount = 0.0f;
+
+	HandleRespawn();
 }
 
 void APawnBase::HandleRespawn()
 {
-	//show meshes
-	mBaseMesh->bHiddenInGame = false;
-	mTurretMesh->bHiddenInGame = false;
-	mBarrelMesh->bHiddenInGame = false;
+	//Un-Hide Actor
+	SetActorHiddenInGame(false);
 
-	//enable collisions
-	mBaseMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	mTurretMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	mBarrelMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	//Re-Enable Collisions
+	SetActorEnableCollision(true);
 }
 
 // Called every frame
 void APawnBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (bTimer) Timer(DeltaTime);
 }
 
 // Called to bind functionality to input

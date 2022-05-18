@@ -6,6 +6,8 @@ class AProjectileBase;
 class UCapsuleComponent;
 class UStaticMeshComponent;
 class USceneComponent;
+class AResourceTriggerBox;
+class UWorld;
 
 UCLASS()
 class CRAFTING_SYSTEM_001_API APawnBase : public APawn
@@ -24,6 +26,12 @@ public:
 
 	virtual void HandleDestruction();
 
+	UPROPERTY(EditAnywhere, Category = "Respawning")
+		float mTimeToRespawn = 30.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Resources")
+		int mTestResourceAmount = 10;
+
 protected:
 	void BeginPlay() override;
 
@@ -31,6 +39,12 @@ protected:
 	virtual void Fire();
 	
 	virtual void HandleRespawn();
+
+	virtual void SpawnResources();
+
+	virtual void StartTimer();
+	virtual void Timer(float i);
+	virtual void ResetTimer();
 
 private:
 	void InitComponents();
@@ -72,4 +86,7 @@ private:
 		Category = "Projectile Type",
 		meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AProjectileBase> mProjectileClass;
+
+	bool bTimer = false;
+	float mTimerCount = 0.0f;
 };

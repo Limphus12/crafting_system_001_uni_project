@@ -15,8 +15,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Resources")
 	int mTestResourceCount = 0;
 
-	void AddTestResource();
-	void MinusTestResource();
+	void AddTestResource(int aAmount);
+	void MinusTestResource(int aAmount);
 
 protected:
 	// Called when the game starts

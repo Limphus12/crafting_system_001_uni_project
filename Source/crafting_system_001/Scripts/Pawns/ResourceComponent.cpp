@@ -14,20 +14,29 @@ void UResourceComponent::BeginPlay()
 	Super::BeginPlay();
 }
 
-void UResourceComponent::AddTestResource()
+void UResourceComponent::AddTestResource(int aAmount)
 {
-	mTestResourceCount++;
+	if (aAmount == 0) UE_LOG(LogTemp, Warning, TEXT("adding 0 resources!!! why???"));
+	
+	mTestResourceCount += aAmount;
 
-	UE_LOG(LogTemp, Warning, TEXT("added resource"));
+	UE_LOG(LogTemp, Warning, TEXT("added test resource"));
 }
 
-void UResourceComponent::MinusTestResource()
+void UResourceComponent::MinusTestResource(int aAmount)
 {
-	if (mTestResourceCount > 0)
+	if (aAmount == 0) UE_LOG(LogTemp, Warning, TEXT("minus-ing 0 resources!!! why???"));
+
+	if ((mTestResourceCount - aAmount) < 0)
 	{
-		mTestResourceCount--;
-		UE_LOG(LogTemp, Warning, TEXT("minus'd resource"));
+		UE_LOG(LogTemp, Warning, TEXT("cannot minus test resource - value would fall below 0"));
 	}
 
-	else UE_LOG(LogTemp, Warning, TEXT("resource at 0 already!"));
+	else if ((mTestResourceCount - aAmount) > 0)
+	{
+		mTestResourceCount -= aAmount;
+		UE_LOG(LogTemp, Warning, TEXT("minus'd test resource"));
+	}
+
+	else if (mTestResourceCount <= 0) UE_LOG(LogTemp, Warning, TEXT("test resource at 0 already!"));
 }
