@@ -1,5 +1,9 @@
 #include "CoreMinimal.h"
 #include "PawnBase.h"
+
+#include "Blueprint/UserWidget.h"
+#include <crafting_system_001/Scripts/Actors/GarageWidget.h>
+
 #include "TankPawn.generated.h"
 
 class APlayerController;
@@ -27,12 +31,13 @@ public:
 
 protected:
 	void BeginPlay() override;
-
+	
 	void HandleDestruction() override;
 
 private:
 	void InitComponents();
 	void InitPlayerController();
+	void InitGarageWidget();
 
 	void CalculateMovementInput(const float aValue);
 	void CalculateRotationInput(const float aValue);
@@ -41,6 +46,8 @@ private:
 	void RotateBody();
 
 	void RotateTurretToMouseCursorLocation();
+
+	void ToggleGarageWidget();
 
 	APlayerController* mPlayerController = nullptr;
 
@@ -80,5 +87,28 @@ private:
 		meta = (AllowPrivateAccess = "true"))
 	float mRotationSpeed = 60.0f; //Seems to be in degrees per second.
 
+
+
+	//Class References
+
 	UResourceComponent* mResourceComponent = nullptr;
+
+	//UPROPERTY(EditAnywhere, Category = "Classes")
+	//TSubclassOf<UUserWidget> WidgetClass;
+
+	//UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
+	//class UGarageWidget* mGarageWidget;
+
+
+	//Widget Class to Spawn
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class UGarageWidget> GarageWidgetClass;
+
+	//Widget Instance to use as our UI
+	UPROPERTY()
+		class UGarageWidget* mGarageWidget;
+
+	//*private* variables
+
+	bool bGarageWidget = false;
 };
