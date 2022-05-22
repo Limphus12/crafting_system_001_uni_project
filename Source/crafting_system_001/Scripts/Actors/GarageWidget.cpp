@@ -13,5 +13,7 @@ void UGarageWidget::NativeConstruct()
 
 void UGarageWidget::TestButtonOnClicked()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Test Button Clicked"));
+
 	TestUpgradeButtonText->SetText(FText::FromString(TestTextWidgetString));
 }

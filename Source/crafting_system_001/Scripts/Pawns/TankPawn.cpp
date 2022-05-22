@@ -155,20 +155,20 @@ void ATankPawn::ToggleGarageWidget()
 
 	//NEW CODE
 
-	UE_LOG(LogTemp, Warning, TEXT("toggling widget"));
+	//UE_LOG(LogTemp, Warning, TEXT("toggling widget"));
 
 	bGarageWidget = !bGarageWidget;
 
 	if (bGarageWidget)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("on"));
+		//UE_LOG(LogTemp, Warning, TEXT("on"));
 
 		InitGarageWidget();
 	}
 
 	else if (!bGarageWidget)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("off"));
+		//UE_LOG(LogTemp, Warning, TEXT("off"));
 
 		mGarageWidget->RemoveFromParent();
 		mGarageWidget = nullptr;
