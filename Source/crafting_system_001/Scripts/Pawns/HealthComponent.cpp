@@ -47,8 +47,7 @@ void UHealthComponent::RespawnPlayer(AActor* actor)
 
 	actor->SetActorLocationAndRotation(UHealthComponent::mPlayerRespawnLocation, UHealthComponent::mPlayerRespawnRotation, false, hr, ETeleportType::None);
 
-	//remove some resources from them? as a penalty for dying.
-
+	//remove some resources from them? as a penalty for dying - I would need to access the player's resource component.
 
 	//Reset the player's health.
 	ResetHealth();
@@ -73,4 +72,14 @@ void UHealthComponent::RespawnTurret(AActor* actor)
 void UHealthComponent::ResetHealth()
 {
 	mCurrentHealth = mDefaultHealth;
+}
+
+void UHealthComponent::SetCurrentHealth(float i)
+{
+	mCurrentHealth = i;
+}
+
+void UHealthComponent::SetDefaultHealth(float i)
+{
+	mDefaultHealth = i;
 }

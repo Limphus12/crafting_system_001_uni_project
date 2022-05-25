@@ -29,6 +29,16 @@ protected:
 	
 	void ResetHealth();
 
+	//Set Functions
+
+	void SetCurrentHealth(float i);
+
+	void SetDefaultHealth(float i);
+
+
+
+	//Respawn Functions
+
 	void RespawnPlayer(AActor* actor);
 
 	void RespawnTurret(AActor* actor);
