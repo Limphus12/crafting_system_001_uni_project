@@ -23,8 +23,6 @@ void ATankPawn::BeginPlay()
 	Super::BeginPlay();
 
 	InitPlayerController();
-
-	//InitGarageWidget();
 }
 
 void ATankPawn::HandleDestruction()
@@ -124,58 +122,18 @@ void ATankPawn::RotateTurretToMouseCursorLocation()
 
 void ATankPawn::ToggleGarageWidget()
 {
-	/*
-	
-
-	//OLD CODE
-
-	UE_LOG(LogTemp, Warning, TEXT("toggling widget"));
-
-	if (mGarageWidget)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("widget check"));
-
-		bGarageWidget = !bGarageWidget;
-
-		if (bGarageWidget)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("on"));
-
-			mGarageWidget->AddToViewport();
-		}
-
-		else if (!bGarageWidget)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("off"));
-
-			mGarageWidget->RemoveFromViewport();
-		}
-	}
-	*/
-
-	//NEW CODE
-
-	//UE_LOG(LogTemp, Warning, TEXT("toggling widget"));
-
 	bGarageWidget = !bGarageWidget;
 
 	if (bGarageWidget)
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("on"));
-
 		InitGarageWidget();
 	}
 
 	else if (!bGarageWidget)
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("off"));
-
 		mGarageWidget->RemoveFromParent();
 		mGarageWidget = nullptr;
 	}
-	
-	//mGarageWidget->RemoveFromParent();
-	//mGarageWidget = nullptr;
 }
 
 void ATankPawn::InitGarageWidget()
@@ -188,24 +146,6 @@ void ATankPawn::InitGarageWidget()
 		check(mGarageWidget);
 		mGarageWidget->AddToPlayerScreen();
 	}
-
-	/*
-	UE_LOG(LogTemp, Warning, TEXT("init widget"));
-
-	if (IsValid(WidgetClass))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("widget class valid"));
-
-		mGarageWidget = Cast<UGarageWidget>(CreateWidget(GetWorld(), WidgetClass));
-
-		if (mGarageWidget != nullptr)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("garage widget != nullptr"));
-
-			mGarageWidget->AddToViewport();
-		}
-	}
-	*/
 }
 
 void ATankPawn::AddTestResource(int aAmount)
@@ -220,4 +160,9 @@ void ATankPawn::MinusTestResource(int aAmount)
 	if (mResourceComponent == nullptr) return;
 
 	mResourceComponent->MinusTestResource(aAmount);
+}
+
+void ATankPawn::UpdateSpeed(float amount)
+{
+	mMovementSpeed = amount;
 }

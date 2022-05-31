@@ -16,7 +16,7 @@ void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	mCurrentHealth = mDefaultHealth;
+	mCurrentHealth = mMaxHealth;
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::TakeDamage);
 }
 
@@ -28,7 +28,7 @@ void UHealthComponent::TakeDamage(AActor* aDamagedActor, float aDamage, const UD
 	check(aInstigatedBy != nullptr);
 	check(aDamageCauser != nullptr);
 
-	mCurrentHealth = FMath::Clamp(mCurrentHealth - aDamage, 0.0f, mDefaultHealth);
+	mCurrentHealth = FMath::Clamp(mCurrentHealth - aDamage, 0.0f, mMaxHealth);
 
 	if (mCurrentHealth <= 0.0f)
 	{ 
@@ -71,7 +71,7 @@ void UHealthComponent::RespawnTurret(AActor* actor)
 
 void UHealthComponent::ResetHealth()
 {
-	mCurrentHealth = mDefaultHealth;
+	mCurrentHealth = mMaxHealth;
 }
 
 void UHealthComponent::SetCurrentHealth(float i)
@@ -79,7 +79,7 @@ void UHealthComponent::SetCurrentHealth(float i)
 	mCurrentHealth = i;
 }
 
-void UHealthComponent::SetDefaultHealth(float i)
+void UHealthComponent::SetMaxHealth(float i)
 {
-	mDefaultHealth = i;
+	mMaxHealth = i;
 }

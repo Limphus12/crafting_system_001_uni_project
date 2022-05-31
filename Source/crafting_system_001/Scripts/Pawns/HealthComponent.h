@@ -20,6 +20,15 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Respawn")
 		FQuat mPlayerRespawnRotation;
 
+	//Health Functions
+	void SetCurrentHealth(float i);
+
+	void SetMaxHealth(float i);
+
+	void ResetHealth();
+
+
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -27,24 +36,14 @@ protected:
 	UFUNCTION()
 	void TakeDamage(AActor* aDamagedActor, float aDamage, const UDamageType* aDamageType, AController* aInstigatedBy, AActor* aDamageCauser);
 	
-	void ResetHealth();
-
-	//Set Functions
-
-	void SetCurrentHealth(float i);
-
-	void SetDefaultHealth(float i);
-
-
 
 	//Respawn Functions
-
 	void RespawnPlayer(AActor* actor);
 
 	void RespawnTurret(AActor* actor);
 
 private:
 	UPROPERTY(EditAnywhere)
-		float mDefaultHealth = 100.0f;
+		float mMaxHealth = 100.0f;
 		float mCurrentHealth = 0.0f;
 };

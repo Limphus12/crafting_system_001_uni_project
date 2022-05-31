@@ -1,7 +1,11 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "UpgradeManagerComponent.generated.h"
 
+#include "crafting_system_001/Scripts/Actors/ProjectileBase.h"
+#include "crafting_system_001/Scripts/Pawns/HealthComponent.h"
+#include "crafting_system_001/Scripts/Pawns/TankPawn.h"
+
+#include "UpgradeManagerComponent.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class CRAFTING_SYSTEM_001_API UUpgradeManagerComponent : public UActorComponent
@@ -15,7 +19,6 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-
 	//Button Functions
 
 	//int i is the component/part (refer to selectedComponents comment below). int j is the tier (0 being default, 1 is first tier etc.)
@@ -26,15 +29,18 @@ public:
 
 	void Equip();
 
-	
-
-
-
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
 private:
+
+	void InitComponents();
+
+	//class references
+	AProjectileBase* mTankProjectile;
+	UHealthComponent* mHealthComponent;
+	ATankPawn* mTankPawn;
 
 	//unlock booleans
 	bool bChassisUnlocks[4] = { true, false, false, false };

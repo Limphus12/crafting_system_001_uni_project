@@ -8,7 +8,14 @@ void UGarageWidget::NativeConstruct()
 	{
 		//Binding the testbuttononclicked method to the button
 		TestUpgradeButton->OnClicked.AddDynamic(this, &UGarageWidget::TestButtonOnClicked); 
+
+		InitComponents();
 	}
+}
+
+void UGarageWidget::InitComponents()
+{
+
 }
 
 void UGarageWidget::TestButtonOnClicked()

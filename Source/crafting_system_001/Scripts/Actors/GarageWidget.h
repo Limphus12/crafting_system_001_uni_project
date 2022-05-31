@@ -26,4 +26,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XConfiguration")
 		FString TestTextWidgetString;
 
+	void InitComponents();
+
+private:
+
+
+
 };

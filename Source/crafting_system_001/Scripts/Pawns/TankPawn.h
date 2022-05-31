@@ -26,6 +26,8 @@ public:
 	void AddTestResource(int aAmount);
 	void MinusTestResource(int aAmount);
 
+	void UpdateSpeed(float amount);
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -87,18 +89,17 @@ private:
 		meta = (AllowPrivateAccess = "true"))
 	float mRotationSpeed = 60.0f; //Seems to be in degrees per second.
 
-
+	/*
+	UPROPERTY(EditAnywhere,
+		BlueprintReadWrite,
+		Category = "Movement",
+		meta = (AllowPrivateAccess = "true"))
+		float mFuelAmount = 100.0f; //fuel
+	*/
 
 	//Class References
 
 	UResourceComponent* mResourceComponent = nullptr;
-
-	//UPROPERTY(EditAnywhere, Category = "Classes")
-	//TSubclassOf<UUserWidget> WidgetClass;
-
-	//UPROPERTY(VisibleInstanceOnly, Category = "Runtime")
-	//class UGarageWidget* mGarageWidget;
-
 
 	//Widget Class to Spawn
 	UPROPERTY(EditAnywhere)
