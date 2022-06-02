@@ -3,6 +3,7 @@
 
 #include "crafting_system_001/Scripts/Actors/ProjectileBase.h"
 #include "crafting_system_001/Scripts/Pawns/HealthComponent.h"
+#include "crafting_system_001/Scripts/Pawns/ResourceComponent.h"
 #include "crafting_system_001/Scripts/Pawns/TankPawn.h"
 
 #include "UpgradeManagerComponent.generated.h"
@@ -27,7 +28,9 @@ public:
 	//int i is the component/part, correlating to the top-down order of the unlock booleans, int j is the tier (0 is default, 1 is first tier etc.)
 	void Unlock(int i, int j);
 
-	void Equip();
+	void Equip(int i, int j);
+
+	void CheckCost(int i, int j);
 
 protected:
 	// Called when the game starts
@@ -41,6 +44,7 @@ private:
 	AProjectileBase* mTankProjectile;
 	UHealthComponent* mHealthComponent;
 	ATankPawn* mTankPawn;
+	UResourceComponent* mResourceComponent;
 
 	//unlock booleans
 	bool bChassisUnlocks[4] = { true, false, false, false };

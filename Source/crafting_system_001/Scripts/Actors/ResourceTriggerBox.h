@@ -22,8 +22,12 @@ public:
 		void OnOverlapEnd(class AActor* OverlappedActor, class AActor* OtherActor);
 
 	void SetTestResourceAmount(int aAmount);
+	void SetResourceAmounts(int a, int b, int c, int d);
 
 	//Resources
 	UPROPERTY(EditAnywhere, Category = "Resources")
 		int mTestResourceAmount = 0;
+
+	UPROPERTY(EditAnywhere, Category = "Resources")
+		int mResourceAmounts[4] = { 0, 0, 0, 0 };
 };

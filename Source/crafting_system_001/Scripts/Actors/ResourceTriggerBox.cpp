@@ -50,3 +50,11 @@ void AResourceTriggerBox::SetTestResourceAmount(int aAmount)
 {
 	mTestResourceAmount = aAmount;
 }
+
+void AResourceTriggerBox::SetResourceAmounts(int a, int b, int c, int d)
+{
+	mResourceAmounts[0] = a;
+	mResourceAmounts[1] = b;
+	mResourceAmounts[2] = c;
+	mResourceAmounts[3] = d;
+}

@@ -63,7 +63,8 @@ void APawnBase::SpawnResources()
 
 	if (artb != nullptr)
 	{
-		artb->SetTestResourceAmount(mTestResourceAmount);
+		//artb->SetTestResourceAmount(mTestResourceAmount);
+		artb->SetResourceAmounts(mResourceAmounts[0], mResourceAmounts[1], mResourceAmounts[2], mResourceAmounts[3]);
 	}
 }
 

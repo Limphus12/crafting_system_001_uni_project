@@ -1,5 +1,8 @@
+#pragma once
+
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+//#include "crafting_system_001/Scripts/Pawns/UpgradeManagerComponent.h"
 #include "GarageWidget.generated.h"
 
 UCLASS()
@@ -30,6 +33,6 @@ public:
 
 private:
 
-
+	//UUpgradeManagerComponent* mUpgradeComponent;
 
 };

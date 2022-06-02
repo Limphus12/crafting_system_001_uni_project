@@ -33,36 +33,119 @@ void UUpgradeManagerComponent::InitComponents()
 
 	check(mHealthComponent == nullptr);
 	mTankPawn = Cast<ATankPawn>(actor);
+
+	check(mHealthComponent == nullptr);
+	mResourceComponent = Cast<UResourceComponent>(actor);
 }
 
 void UUpgradeManagerComponent::CheckUnlock(int i, int j)
 {
 	//check if we have unlocked the part or not.
 
-	//if so, equip it
+	//chassis
+	if (i == 0)
+	{
+		//if not, check if we have enough resources to unlock it.
+		if (bChassisUnlocks[j] == false)
+		{
+			CheckCost(i, j); //if we do, then unlock and equip it.
 
-	//if not, check if we have enough resources to unlock it.
+			//if we do not, just throw a debug error for now, later on add some UI/UX.
+		}
 
-	//if we do, then unlock and equip it.
+		//if so, equip it
+		else if (bChassisUnlocks[j] == true)
+		{
+			Equip(i, j);
+		}
+	}
+}
 
-	//if we do not, just throw a debug error for now, later on add some UI/UX.
+void UUpgradeManagerComponent::CheckCost(int i, int j)
+{
+	//components - position in array is the resource type; 0 - cogs, 1 - circuit boards, 2 - scrap, 3 - armour plates.
+	//int mResources[4] = { 0, 0, 0, 0 };
+
+	//chassis
+	if (i == 0)
+	{
+		//compare the chassis cost to the resourceComponent mResources.
+		if (j == 0)
+		{
+			if (mResourceComponent->mResources[0] >= mChassisT0Costs[0] && mResourceComponent->mResources[1] >= mChassisT0Costs[1] ||
+				mResourceComponent->mResources[2] >= mChassisT0Costs[2] && mResourceComponent->mResources[3] >= mChassisT0Costs[3])
+			{
+				Unlock(i, j);
+			}
+		}
+
+		else if (j == 1)
+		{
+			if (mResourceComponent->mResources[0] >= mChassisT1Costs[0] && mResourceComponent->mResources[1] >= mChassisT1Costs[1] ||
+				mResourceComponent->mResources[2] >= mChassisT1Costs[2] && mResourceComponent->mResources[3] >= mChassisT1Costs[3])
+			{
+				Unlock(i, j);
+			}
+		}
+
+		else if (j == 2)
+		{
+			if (mResourceComponent->mResources[0] >= mChassisT2Costs[0] && mResourceComponent->mResources[1] >= mChassisT2Costs[1] ||
+				mResourceComponent->mResources[2] >= mChassisT2Costs[2] && mResourceComponent->mResources[3] >= mChassisT2Costs[3])
+			{
+				Unlock(i, j);
+			}
+		}
+
+		else if (j == 3)
+		{
+			if (mResourceComponent->mResources[0] >= mChassisT3Costs[0] && mResourceComponent->mResources[1] >= mChassisT3Costs[1] ||
+				mResourceComponent->mResources[2] >= mChassisT3Costs[2] && mResourceComponent->mResources[3] >= mChassisT3Costs[3])
+			{
+				Unlock(i, j);
+			}
+		}
+	}
 }
 
 void UUpgradeManagerComponent::Unlock(int i, int j)
 {
 	//navigate to the correct upgrade boolean
 
-	//int i is used to select the correct part.
+	//chassis
+	if (i == 0 || bChassisUnlocks[j] == false)
+	{
+		bChassisUnlocks[j] = true;
+	}
 
-	//int j is used to select the correct index in the array.
+	//barrel
+	if (i == 1 || bBarrelUnlocks[j] == false)
+	{
+		bBarrelUnlocks[j] = true;
+	}
 
-	//once we have navigated to the correct boolean set it to true.
+	//suspension
+	if (i == 2 || bSuspensionUnlocks[j] == false)
+	{
+		bSuspensionUnlocks[j] = true;
+	}
 
-	//now we can equip it.
+	//engine
+	if (i == 3 || bEngineUnlocks[j] == false)
+	{
+		bEngineUnlocks[j] = true;
+	}
+
+	//now we can equip the new part
+	Equip(i, j);
 }
 
-void UUpgradeManagerComponent::Equip()
+void UUpgradeManagerComponent::Equip(int i, int j)
 {
+	//navigate to the correct part.
+
+	//unlock 
+
 	//change the component mesh
 
 	//update the stats
@@ -80,3 +163,4 @@ void UUpgradeManagerComponent::Equip()
 	//if we're changing the fuel, grab the tankpawn and change the fuel amount.
 	//TBD
 }
+

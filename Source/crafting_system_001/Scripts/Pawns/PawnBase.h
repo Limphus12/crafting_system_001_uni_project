@@ -1,3 +1,5 @@
+#pragma once
+
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "PawnBase.generated.h"
@@ -29,8 +31,11 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Respawning")
 		float mTimeToRespawn = 30.0f;
 
+	//UPROPERTY(EditAnywhere, Category = "Resources")
+	//	int mTestResourceAmount = 10;
+
 	UPROPERTY(EditAnywhere, Category = "Resources")
-		int mTestResourceAmount = 10;
+		int mResourceAmounts[4] = { 10, 10, 10, 10 };
 
 protected:
 	void BeginPlay() override;

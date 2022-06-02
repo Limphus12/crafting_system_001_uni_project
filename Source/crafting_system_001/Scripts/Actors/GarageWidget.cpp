@@ -15,6 +15,7 @@ void UGarageWidget::NativeConstruct()
 
 void UGarageWidget::InitComponents()
 {
+	//check(mUpgradeComponent == nullptr);
 
 }
 
@@ -22,5 +23,7 @@ void UGarageWidget::TestButtonOnClicked()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Test Button Clicked"));
 
-	TestUpgradeButtonText->SetText(FText::FromString(TestTextWidgetString));
+	//TestUpgradeButtonText->SetText(FText::FromString(TestTextWidgetString));
+
+
 }

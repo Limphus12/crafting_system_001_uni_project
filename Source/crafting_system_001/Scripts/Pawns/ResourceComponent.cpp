@@ -40,3 +40,50 @@ void UResourceComponent::MinusTestResource(int aAmount)
 
 	else if (mTestResourceCount <= 0) UE_LOG(LogTemp, Warning, TEXT("test resource at 0 already!"));
 }
+
+void UResourceComponent::AddResources(int a, int b, int c, int d)
+{
+	//if (a == 0) UE_LOG(LogTemp, Warning, TEXT("adding 0 'a' resources!!! why???"));
+
+	mResources[0] += a;
+	mResources[1] += b;
+	mResources[2] += c;
+	mResources[3] += d;
+}
+
+void UResourceComponent::MinusResources(int a, int b, int c, int d)
+{
+	//if (a == 0) UE_LOG(LogTemp, Warning, TEXT("minus-ing 0 'a' resources!!! why???"));
+
+	if ((mResources[0] - a) < 0 || (mResources[1] - b) < 0 || (mResources[2] - c) < 0 || (mResources[3] - d) < 0)
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("cannot minus test resource - value would fall below 0"));
+	}
+
+	if ((mResources[0] - a) >= 0)
+	{
+		mResources[0] -= a;
+	}
+
+	if ((mResources[1] - b) >= 0)
+	{
+		mResources[1] -= b;
+	}
+
+	if ((mResources[2] - c) >= 0)
+	{
+		mResources[2] -= c;
+	}
+
+	if ((mResources[3] - d) >= 0)
+	{
+		mResources[3] -= d;
+	}
+
+	else if (mTestResourceCount <= 0) UE_LOG(LogTemp, Warning, TEXT("test resource at 0 already!"));
+}
+
+int * UResourceComponent::GetCurrentResources()
+{
+	return mResources;
+}
