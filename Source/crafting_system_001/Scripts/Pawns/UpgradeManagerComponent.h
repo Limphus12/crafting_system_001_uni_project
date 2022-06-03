@@ -22,10 +22,10 @@ public:
 
 	//Button Functions
 
-	//int i is the component/part (refer to selectedComponents comment below). int j is the tier (0 being default, 1 is first tier etc.)
+	//i = part type, j = part tier
 	void CheckUnlock(int i, int j); 
 	
-	//int i is the component/part, correlating to the top-down order of the unlock booleans, int j is the tier (0 is default, 1 is first tier etc.)
+	//i = part type, j = part tier
 	void Unlock(int i, int j);
 
 	void Equip(int i, int j);
