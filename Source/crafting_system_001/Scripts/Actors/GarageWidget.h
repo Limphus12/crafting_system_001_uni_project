@@ -5,6 +5,8 @@
 //#include "crafting_system_001/Scripts/Pawns/UpgradeManagerComponent.h"
 #include "GarageWidget.generated.h"
 
+class UUpgradeManagerComponent;
+
 UCLASS()
 class CRAFTING_SYSTEM_001_API UGarageWidget : public UUserWidget
 {
@@ -29,10 +31,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XConfiguration")
 		FString TestTextWidgetString;
 
-	void InitComponents();
+	void InitUpgradeComponent(UUpgradeManagerComponent* upgradeComponent);
 
 private:
 
-	//UUpgradeManagerComponent* mUpgradeComponent;
-
+	UUpgradeManagerComponent* mUpgradeComponent = nullptr;
 };

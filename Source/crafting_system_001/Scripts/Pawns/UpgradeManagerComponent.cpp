@@ -13,6 +13,12 @@ void UUpgradeManagerComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	InitComponents();
+
+	//UI
+	//GarageWidgetClass = nullptr;
+	//mGarageWidget = nullptr;
+
+	//ToggleGarageWidget();
 }
 
 // Called every frame
@@ -25,22 +31,29 @@ void UUpgradeManagerComponent::InitComponents()
 {
 	AActor* actor = GetOwner();
 
-	check(mTankProjectile == nullptr);
-	mTankProjectile = Cast<AProjectileBase>(actor);
+	//mTankProjectile = Cast<AProjectileBase>(actor);
 
-	check(mHealthComponent == nullptr);
-	mHealthComponent = Cast<UHealthComponent>(actor);
+	//removed, were gonna update damage through the tank pawn, since the projectile's damage is set when instantiated.
+	//check(mTankProjectile == nullptr);
+	//mTankProjectile = Cast<AProjectileBase>(actor);
 
-	check(mHealthComponent == nullptr);
+	check(mTankPawn == nullptr);
 	mTankPawn = Cast<ATankPawn>(actor);
 
 	check(mHealthComponent == nullptr);
-	mResourceComponent = Cast<UResourceComponent>(actor);
+	mHealthComponent = actor->FindComponentByClass<UHealthComponent>();
+
+	check(mResourceComponent == nullptr);
+	mResourceComponent = actor->FindComponentByClass<UResourceComponent>();
 }
 
+//i = part type, j = part tier
+//call this on a widget button
 void UUpgradeManagerComponent::CheckUnlock(int i, int j)
 {
 	//check if we have unlocked the part or not.
+
+	UE_LOG(LogTemp, Warning, TEXT("Checking Unlock"));
 
 	//chassis
 	if (i == 0)
@@ -118,8 +131,17 @@ void UUpgradeManagerComponent::CheckUnlock(int i, int j)
 //i = part type, j = part tier
 void UUpgradeManagerComponent::CheckCost(int i, int j)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Checking Cost"));
+
 	//components - position in array is the resource type; 0 - cogs, 1 - circuit boards, 2 - scrap, 3 - armour plates.
 	//int mResources[4] = { 0, 0, 0, 0 };
+
+	if (mResourceComponent == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("We do not have the resource component"));
+
+		return;
+	}
 
 	//chassis
 	if (i == 0)
@@ -132,6 +154,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			{
 				Unlock(i, j);
 			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
+			}
 		}
 
 		else if (j == 1)
@@ -140,6 +167,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 				mResourceComponent->mResources[2] >= mChassisT1Costs[2] && mResourceComponent->mResources[3] >= mChassisT1Costs[3])
 			{
 				Unlock(i, j);
+			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
 			}
 		}
 
@@ -150,6 +182,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			{
 				Unlock(i, j);
 			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
+			}
 		}
 
 		else if (j == 3)
@@ -158,6 +195,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 				mResourceComponent->mResources[2] >= mChassisT3Costs[2] && mResourceComponent->mResources[3] >= mChassisT3Costs[3])
 			{
 				Unlock(i, j);
+			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
 			}
 		}
 	}
@@ -173,6 +215,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			{
 				Unlock(i, j);
 			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
+			}
 		}
 
 		else if (j == 1)
@@ -181,6 +228,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 				mResourceComponent->mResources[2] >= mBarrelT1Costs[2] && mResourceComponent->mResources[3] >= mBarrelT1Costs[3])
 			{
 				Unlock(i, j);
+			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
 			}
 		}
 
@@ -191,6 +243,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			{
 				Unlock(i, j);
 			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
+			}
 		}
 
 		else if (j == 3)
@@ -199,6 +256,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 				mResourceComponent->mResources[2] >= mBarrelT3Costs[2] && mResourceComponent->mResources[3] >= mBarrelT3Costs[3])
 			{
 				Unlock(i, j);
+			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
 			}
 		}
 	}
@@ -214,6 +276,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			{
 				Unlock(i, j);
 			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
+			}
 		}
 
 		else if (j == 1)
@@ -222,6 +289,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 				mResourceComponent->mResources[2] >= mSuspensionT1Costs[2] && mResourceComponent->mResources[3] >= mSuspensionT1Costs[3])
 			{
 				Unlock(i, j);
+			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
 			}
 		}
 
@@ -232,6 +304,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			{
 				Unlock(i, j);
 			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
+			}
 		}
 
 		else if (j == 3)
@@ -240,6 +317,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 				mResourceComponent->mResources[2] >= mSuspensionT3Costs[2] && mResourceComponent->mResources[3] >= mSuspensionT3Costs[3])
 			{
 				Unlock(i, j);
+			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
 			}
 		}
 	}
@@ -255,6 +337,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			{
 				Unlock(i, j);
 			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
+			}
 		}
 
 		else if (j == 1)
@@ -263,6 +350,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 				mResourceComponent->mResources[2] >= mEngineT1Costs[2] && mResourceComponent->mResources[3] >= mEngineT1Costs[3])
 			{
 				Unlock(i, j);
+			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
 			}
 		}
 
@@ -273,6 +365,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			{
 				Unlock(i, j);
 			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
+			}
 		}
 
 		else if (j == 3)
@@ -282,6 +379,11 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			{
 				Unlock(i, j);
 			}
+
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot Unlock"));
+			}
 		}
 	}
 }
@@ -290,6 +392,7 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 void UUpgradeManagerComponent::Unlock(int i, int j)
 {
 	//navigate to the correct upgrade boolean
+	UE_LOG(LogTemp, Warning, TEXT("Unlocking Part"));
 
 	//chassis
 	if (i == 0 && bChassisUnlocks[j] == false)
@@ -322,14 +425,20 @@ void UUpgradeManagerComponent::Unlock(int i, int j)
 //i = part type, j = part tier
 void UUpgradeManagerComponent::Equip(int i, int j)
 {
+	UE_LOG(LogTemp, Warning, TEXT("equipping item"));
+
+
 	//navigate to the correct part
 
 	//change the component mesh
 
 	//update the stats
 
-		//if we're changing the damage, grab the projectile class and change its damage value.
-		mTankProjectile->UpdateDamage(1);
+	//make sure we have all the necessary parts
+
+	if (mHealthComponent != nullptr && mTankPawn != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("we got all our components :D"));
 
 		//if we're changing the health, grab the health component and update the value
 		mHealthComponent->SetMaxHealth(1);
@@ -342,7 +451,50 @@ void UUpgradeManagerComponent::Equip(int i, int j)
 
 		//we need to grab both speed values (engine and suspension values).
 
+		//if we're changing the damage, grab the tankpawn class and change its damage value.
+		mTankPawn->UpdateDamage(1);
+
 		//if we're changing the fuel, grab the tankpawn and change the fuel amount.
 		//TBD
+	}
+
+	//if (mTankProjectile == nullptr) UE_LOG(LogTemp, Warning, TEXT("missing projectile, baka"));
+	if (mHealthComponent == nullptr) UE_LOG(LogTemp, Warning, TEXT("missing health, baka"));
+	if (mTankPawn == nullptr) UE_LOG(LogTemp, Warning, TEXT("missing tank, baka"));
 }
 
+/*
+void UUpgradeManagerComponent::InitGarageWidget()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Init Garage Widget"));
+
+	if (GarageWidgetClass)
+	{
+		APlayerController* apc = mTankPawn->GetController<APlayerController>();
+		check(apc);
+		mGarageWidget = CreateWidget<UGarageWidget>(apc, GarageWidgetClass);
+		check(mGarageWidget);
+		mGarageWidget->AddToPlayerScreen();
+
+		mGarageWidget->InitUpgradeComponent(this);
+	}
+}
+
+void UUpgradeManagerComponent::ToggleGarageWidget()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Toggling Garage Widget"));
+
+	bGarageWidget = !bGarageWidget;
+
+	if (bGarageWidget)
+	{
+		InitGarageWidget();
+	}
+
+	else if (!bGarageWidget)
+	{
+		mGarageWidget->RemoveFromParent();
+		mGarageWidget = nullptr;
+	}
+}
+*/

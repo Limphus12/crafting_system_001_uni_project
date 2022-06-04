@@ -16,7 +16,7 @@ public:
 	// Sets default values for this actor's properties
 	AProjectileBase();
 
-	void UpdateDamage(float amount);
+	void SetDamage(float amount);
 
 protected:
 	// Called when the game starts or when spawned

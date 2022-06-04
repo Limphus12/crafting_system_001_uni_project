@@ -1,8 +1,10 @@
+#pragma once
+
 #include "CoreMinimal.h"
 #include "PawnBase.h"
 
-#include "Blueprint/UserWidget.h"
-#include "crafting_system_001/Scripts/Actors/GarageWidget.h"
+//#include "Blueprint/UserWidget.h"
+//#include "crafting_system_001/Scripts/Actors/GarageWidget.h"
 
 #include "TankPawn.generated.h"
 
@@ -10,6 +12,7 @@ class APlayerController;
 class USpringArmComponent;
 class UCameraComponent;
 class UResourceComponent;
+class UUpgradeManagerComponent;
 
 UCLASS()
 class CRAFTING_SYSTEM_001_API ATankPawn : public APawnBase
@@ -23,8 +26,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	//Resources
-	void AddTestResource(int aAmount);
-	void MinusTestResource(int aAmount);
+	//void AddTestResource(int aAmount);
+	//void MinusTestResource(int aAmount);
+
+	void AddResources(int a, int b, int c, int d);
+	void MinusResources(int a, int b, int c, int d);
 
 	void UpdateSpeed(float amount);
 
@@ -39,7 +45,9 @@ protected:
 private:
 	void InitComponents();
 	void InitPlayerController();
+
 	void InitGarageWidget();
+	void ToggleGarageWidget();
 
 	void CalculateMovementInput(const float aValue);
 	void CalculateRotationInput(const float aValue);
@@ -49,7 +57,6 @@ private:
 
 	void RotateTurretToMouseCursorLocation();
 
-	void ToggleGarageWidget();
 
 	APlayerController* mPlayerController = nullptr;
 
@@ -100,16 +107,16 @@ private:
 	//Class References
 
 	UResourceComponent* mResourceComponent = nullptr;
-
+	UUpgradeManagerComponent* mUpgradeComponent = nullptr;
+	
 	//Widget Class to Spawn
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class UGarageWidget> GarageWidgetClass;
 
 	//Widget Instance to use as our UI
 	UPROPERTY()
-		class UGarageWidget* mGarageWidget;
-
-	//*private* variables
+		class UGarageWidget* mGarageWidget = nullptr;
 
 	bool bGarageWidget = false;
+	
 };

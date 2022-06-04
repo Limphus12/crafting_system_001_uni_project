@@ -37,6 +37,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Resources")
 		int mResourceAmounts[4] = { 10, 10, 10, 10 };
 
+	void UpdateDamage(float amount);
+	float mCurrentDamage = 50.0f; //used to store damage value.
+
 protected:
 	void BeginPlay() override;
 

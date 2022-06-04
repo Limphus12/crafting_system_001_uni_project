@@ -55,7 +55,7 @@ void AProjectileBase::OnHit(UPrimitiveComponent* aHitComponent,
 	Destroy();
 }
 
-void AProjectileBase::UpdateDamage(float amount)
+void AProjectileBase::SetDamage(float amount)
 {
 	mDamage = amount;
 }

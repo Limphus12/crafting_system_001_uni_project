@@ -6,6 +6,9 @@
 #include "crafting_system_001/Scripts/Pawns/ResourceComponent.h"
 #include "crafting_system_001/Scripts/Pawns/TankPawn.h"
 
+#include "Blueprint/UserWidget.h"
+#include "crafting_system_001/Scripts/Actors/GarageWidget.h"
+
 #include "UpgradeManagerComponent.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -40,11 +43,30 @@ private:
 
 	void InitComponents();
 
+	//void InitGarageWidget();
+	//void ToggleGarageWidget();
+
+
+
 	//class references
 	AProjectileBase* mTankProjectile;
 	UHealthComponent* mHealthComponent;
 	ATankPawn* mTankPawn;
 	UResourceComponent* mResourceComponent;
+
+
+	/*
+	//Widget Class to Spawn
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class UGarageWidget> GarageWidgetClass;
+
+	//Widget Instance to use as our UI
+	UPROPERTY()
+		class UGarageWidget* mGarageWidget;
+
+	bool bGarageWidget = false;
+	*/
+
 
 	//unlock booleans
 	bool bChassisUnlocks[4] = { true, false, false, false };

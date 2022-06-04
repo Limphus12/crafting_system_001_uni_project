@@ -5,6 +5,9 @@
 
 #include "Blueprint/UserWidget.h"
 
+#include "crafting_system_001/Scripts/Pawns/UpgradeManagerComponent.h"
+
+
 // Sets default values
 ATankPawn::ATankPawn()
 {
@@ -14,7 +17,7 @@ ATankPawn::ATankPawn()
 	InitComponents();
 
 	//UI
-	GarageWidgetClass = nullptr;
+	//GarageWidgetClass = nullptr;
 	mGarageWidget = nullptr;
 }
 
@@ -61,6 +64,8 @@ void ATankPawn::SetupPlayerInputComponent(UInputComponent* aPlayerInputComponent
 
 void ATankPawn::InitComponents()
 {
+	UE_LOG(LogTemp, Warning, TEXT("tank init comp"));
+
 	check(mSpringArm == nullptr);
 	mSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
 	mSpringArm->SetupAttachment(RootComponent);
@@ -120,6 +125,7 @@ void ATankPawn::RotateTurretToMouseCursorLocation()
 	//I know how to do this in Unity with raycasting, so its just a matter of figuring out how to do it here...
 }
 
+
 void ATankPawn::ToggleGarageWidget()
 {
 	bGarageWidget = !bGarageWidget;
@@ -145,9 +151,27 @@ void ATankPawn::InitGarageWidget()
 		mGarageWidget = CreateWidget<UGarageWidget>(apc, GarageWidgetClass);
 		check(mGarageWidget);
 		mGarageWidget->AddToPlayerScreen();
+
+		//moved from initcomponents(), since this is called on compile, rather than at runtime.
+		check(mUpgradeComponent == nullptr);
+		mUpgradeComponent = this->FindComponentByClass<UUpgradeManagerComponent>();
+
+		if (mUpgradeComponent != nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Wu comp eheh"));
+		}
+
+		else if (mUpgradeComponent == nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Nu comp wawa"));
+		}
+
+
+		mGarageWidget->InitUpgradeComponent(mUpgradeComponent);
 	}
 }
 
+/*
 void ATankPawn::AddTestResource(int aAmount)
 {
 	if (mResourceComponent == nullptr) return;
@@ -161,8 +185,20 @@ void ATankPawn::MinusTestResource(int aAmount)
 
 	mResourceComponent->MinusTestResource(aAmount);
 }
+*/
 
 void ATankPawn::UpdateSpeed(float amount)
 {
 	mMovementSpeed = amount;
+}
+
+//adding resources by calling the addresource method on the resource component.
+void ATankPawn::AddResources(int a, int b, int c, int d)
+{
+	mResourceComponent->AddResources(a, b, c, d);
+}
+
+void ATankPawn::MinusResources(int a, int b, int c, int d)
+{
+	mResourceComponent->MinusResources(a, b, c, d);
 }

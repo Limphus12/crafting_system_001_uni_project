@@ -162,4 +162,11 @@ void APawnBase::SpawnProjectile()
 	AProjectileBase* projectile = GetWorld()->SpawnActor<AProjectileBase>(mProjectileClass, spawnLocation, spawnRotation);
 
 	projectile->SetOwner(this);
+
+	projectile->SetDamage(mCurrentDamage);
+}
+
+void APawnBase::UpdateDamage(float amount)
+{
+	mCurrentDamage = amount;
 }

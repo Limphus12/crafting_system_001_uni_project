@@ -31,7 +31,7 @@ void AResourceTriggerBox::OnOverlapBegin(class AActor* OverlappedActor, class AA
 
 		if (atp != nullptr)
 		{
-			atp->AddTestResource(mTestResourceAmount);
+			atp->AddResources(mResourceAmounts[0], mResourceAmounts[1], mResourceAmounts[2], mResourceAmounts[3]);
 
 			Destroy();
 		}
