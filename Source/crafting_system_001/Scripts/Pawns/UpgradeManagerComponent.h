@@ -9,6 +9,8 @@
 #include "Blueprint/UserWidget.h"
 #include "crafting_system_001/Scripts/Actors/GarageWidget.h"
 
+#include "Runtime/CoreUObject/Public/UObject/SoftObjectPtr.h"
+
 #include "UpgradeManagerComponent.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -133,4 +135,11 @@ private:
 	const int mFuelTankT1Costs[4] = { 1, 1, 1, 1 };
 	const int mFuelTankT2Costs[4] = { 2, 2, 2, 2 };
 	const int mFuelTankT3Costs[4] = { 3, 3, 3, 3 };
+
+
+
+	//Meshes
+
+
+
 };
