@@ -32,7 +32,7 @@ public:
 	void AddResources(int a, int b, int c, int d);
 	void MinusResources(int a, int b, int c, int d);
 
-	void UpdateSpeed(float amount);
+	void UpdateSpeed(float amount, float amount2);
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -50,6 +50,8 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Garage")
 		FQuat mPlayerReturnRotation;
+
+	void UpdateMesh(int i, int j);
 
 protected:
 	void BeginPlay() override;
@@ -137,4 +139,28 @@ private:
 
 	bool bGarageWidget = false;
 	bool bCanMove = true;
+
+
+
+	/** Mesh  */
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Meshes")
+		class UStaticMesh* ChassisMeshes[4];
+
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Meshes")
+		class UStaticMesh* TurretMeshes[4];
+
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Meshes")
+		class UStaticMesh* BarrelMeshes[4];
+
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Meshes")
+		class UStaticMesh* EngineMeshes[4];
+
+
+	//materials
+		//class UMaterial* ChassisMaterialTreads;
+		//class UMaterial* ChassisMaterialWheels;
+
+		//class UMaterial* ChassisMaterials[4];
+		
+
 };

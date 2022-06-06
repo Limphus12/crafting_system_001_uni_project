@@ -43,30 +43,11 @@ public:
 
 	bool bCanShoot = true;
 
-
-protected:
-	void BeginPlay() override;
-
-	virtual void RotateTurret(const FVector& aLookAtTargetLocation);
-	virtual void Fire();
-	
-	virtual void HandleRespawn();
-
-	virtual void SpawnResources();
-
-	virtual void StartTimer();
-	virtual void Timer(float i);
-	virtual void ResetTimer();
-
-private:
-	void InitComponents();
-	void SpawnProjectile();
-
 	//General collisions for the pawn
-	UPROPERTY(VisibleAnywhere, 
-			BlueprintReadOnly, 
-			Category = "Components",
-			meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere,
+		BlueprintReadOnly,
+		Category = "Components",
+		meta = (AllowPrivateAccess = "true"))
 		UCapsuleComponent* mCapsuleComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere,
@@ -91,13 +72,39 @@ private:
 		BlueprintReadOnly,
 		Category = "Components",
 		meta = (AllowPrivateAccess = "true"))
+		UStaticMeshComponent* mEngineMesh = nullptr;
+
+	UPROPERTY(VisibleAnywhere,
+		BlueprintReadOnly,
+		Category = "Components",
+		meta = (AllowPrivateAccess = "true"))
 		USceneComponent* mProjectileSpawnPoint = nullptr;
-	
+
 	UPROPERTY(EditAnywhere,
 		BlueprintReadOnly,
 		Category = "Projectile Type",
 		meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<AProjectileBase> mProjectileClass;
+		TSubclassOf<AProjectileBase> mProjectileClass;
+
+protected:
+	void BeginPlay() override;
+
+	virtual void RotateTurret(const FVector& aLookAtTargetLocation);
+	virtual void Fire();
+	
+	virtual void HandleRespawn();
+
+	virtual void SpawnResources();
+
+	virtual void StartTimer();
+	virtual void Timer(float i);
+	virtual void ResetTimer();
+
+private:
+	void InitComponents();
+	void SpawnProjectile();
+
+	
 
 	bool bTimer = false;
 	float mTimerCount = 0.0f;

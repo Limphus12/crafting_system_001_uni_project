@@ -488,18 +488,24 @@ void UUpgradeManagerComponent::Equip(int i, int j)
 		{
 			mHealthComponent->SetMaxHealth(mChassisHealthAmounts[j]);
 			mHealthComponent->SetCurrentHealth(mChassisHealthAmounts[j]);
+
+			mTankPawn->UpdateMesh(i, j);
 		}
 
 		//turret
 		else if (i == 1)
 		{
 			mTankPawn->UpdateDamage(mBarrelDamageAmounts[j]);
+
+			mTankPawn->UpdateMesh(i, j);
 		}
 
 		//engine
 		else if (i == 3)
 		{
-			mTankPawn->UpdateSpeed(mEngineSpeedAmounts[j]);
+			mTankPawn->UpdateSpeed(mEngineSpeedAmounts[j], mEngineTurnSpeedAmounts[j]);
+
+			mTankPawn->UpdateMesh(i, j);
 		}
 
 		//Update the stats shown in the garage widget
@@ -564,3 +570,14 @@ void UUpgradeManagerComponent::ToggleGarageWidget()
 	}
 }
 */
+
+void UUpgradeManagerComponent::ChangeMesh(int i, int j)
+{
+	//navigate to the correct mesh
+
+	//chassis
+	if (i == 0)
+	{
+
+	}
+}

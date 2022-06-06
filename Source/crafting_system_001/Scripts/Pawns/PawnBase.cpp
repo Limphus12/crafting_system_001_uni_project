@@ -170,6 +170,10 @@ void APawnBase::InitComponents()
 	mTurretMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Turret Mesh"));
 	mTurretMesh->SetupAttachment(mBaseMesh);
 
+	check(mEngineMesh == nullptr);
+	mEngineMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Engine Mesh"));
+	mEngineMesh->SetupAttachment(mBaseMesh);
+
 	check(mBarrelMesh == nullptr);
 	mBarrelMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Barrel Mesh"));
 	mBarrelMesh->SetupAttachment(mTurretMesh);

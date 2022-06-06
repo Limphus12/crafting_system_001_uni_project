@@ -98,6 +98,8 @@ private:
 	const float mEngineSpeedAmounts[4] = { 450, 900, 2250, 4500 }; //major influence
 	//const float mSuspensionSpeedAmounts[4] = { 50, 100, 250, 500 }; //minor influence
 
+	const float mEngineTurnSpeedAmounts[4] = { 60, 90, 120, 180 };
+
 	//fuel - currently do not know what to set these as... I mean this is only a 'if we have time' mechanic.
 	//const float mTankFuelAmounts[4] = { 1, 1, 1, 1 }; //major influence
 	//const float mEngineFuelAmounts[4] = { 1, 1, 1, 1 }; //minor influence
@@ -136,10 +138,8 @@ private:
 	const int mFuelTankT2Costs[4] = { 2, 2, 2, 2 };
 	const int mFuelTankT3Costs[4] = { 3, 3, 3, 3 };
 
+	//Mesh stuff
 
-
-	//Meshes
-
-
-
+	//Mesh Change Function (i = part type, j = tier)
+	void ChangeMesh(int i, int j);
 };
