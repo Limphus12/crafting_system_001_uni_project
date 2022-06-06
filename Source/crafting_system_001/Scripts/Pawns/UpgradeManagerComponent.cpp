@@ -152,6 +152,7 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mChassisT0Costs[0] && mResourceComponent->mResources[1] >= mChassisT0Costs[1] ||
 				mResourceComponent->mResources[2] >= mChassisT0Costs[2] && mResourceComponent->mResources[3] >= mChassisT0Costs[3])
 			{
+				mResourceComponent->MinusResources(mChassisT0Costs[0], mChassisT0Costs[1], mChassisT0Costs[2], mChassisT0Costs[3]);
 				Unlock(i, j);
 			}
 
@@ -166,6 +167,7 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mChassisT1Costs[0] && mResourceComponent->mResources[1] >= mChassisT1Costs[1] ||
 				mResourceComponent->mResources[2] >= mChassisT1Costs[2] && mResourceComponent->mResources[3] >= mChassisT1Costs[3])
 			{
+				mResourceComponent->MinusResources(mChassisT1Costs[0], mChassisT1Costs[1], mChassisT1Costs[2], mChassisT1Costs[3]);
 				Unlock(i, j);
 			}
 
@@ -180,6 +182,8 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mChassisT2Costs[0] && mResourceComponent->mResources[1] >= mChassisT2Costs[1] ||
 				mResourceComponent->mResources[2] >= mChassisT2Costs[2] && mResourceComponent->mResources[3] >= mChassisT2Costs[3])
 			{
+				mResourceComponent->MinusResources(mChassisT2Costs[0], mChassisT2Costs[1], mChassisT2Costs[2], mChassisT2Costs[3]);
+
 				Unlock(i, j);
 			}
 
@@ -194,7 +198,10 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mChassisT3Costs[0] && mResourceComponent->mResources[1] >= mChassisT3Costs[1] ||
 				mResourceComponent->mResources[2] >= mChassisT3Costs[2] && mResourceComponent->mResources[3] >= mChassisT3Costs[3])
 			{
+				mResourceComponent->MinusResources(mChassisT3Costs[0], mChassisT3Costs[1], mChassisT3Costs[2], mChassisT3Costs[3]);
+
 				Unlock(i, j);
+
 			}
 
 			else
@@ -213,7 +220,10 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mBarrelT0Costs[0] && mResourceComponent->mResources[1] >= mBarrelT0Costs[1] ||
 				mResourceComponent->mResources[2] >= mBarrelT0Costs[2] && mResourceComponent->mResources[3] >= mBarrelT0Costs[3])
 			{
+				mResourceComponent->MinusResources(mBarrelT0Costs[0], mBarrelT0Costs[1], mBarrelT0Costs[2], mBarrelT0Costs[3]);
+
 				Unlock(i, j);
+
 			}
 
 			else
@@ -227,7 +237,10 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mBarrelT1Costs[0] && mResourceComponent->mResources[1] >= mBarrelT1Costs[1] ||
 				mResourceComponent->mResources[2] >= mBarrelT1Costs[2] && mResourceComponent->mResources[3] >= mBarrelT1Costs[3])
 			{
+				mResourceComponent->MinusResources(mBarrelT1Costs[0], mBarrelT1Costs[1], mBarrelT1Costs[2], mBarrelT1Costs[3]);
+
 				Unlock(i, j);
+
 			}
 
 			else
@@ -241,7 +254,10 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mBarrelT2Costs[0] && mResourceComponent->mResources[1] >= mBarrelT2Costs[1] ||
 				mResourceComponent->mResources[2] >= mBarrelT2Costs[2] && mResourceComponent->mResources[3] >= mBarrelT2Costs[3])
 			{
+				mResourceComponent->MinusResources(mBarrelT2Costs[0], mBarrelT2Costs[1], mBarrelT2Costs[2], mBarrelT2Costs[3]);
+
 				Unlock(i, j);
+
 			}
 
 			else
@@ -255,7 +271,10 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mBarrelT3Costs[0] && mResourceComponent->mResources[1] >= mBarrelT3Costs[1] ||
 				mResourceComponent->mResources[2] >= mBarrelT3Costs[2] && mResourceComponent->mResources[3] >= mBarrelT3Costs[3])
 			{
+				mResourceComponent->MinusResources(mBarrelT3Costs[0], mBarrelT3Costs[1], mBarrelT3Costs[2], mBarrelT3Costs[3]);
+
 				Unlock(i, j);
+
 			}
 
 			else
@@ -264,7 +283,7 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			}
 		}
 	}
-
+	/*
 	//suspension
 	if (i == 0)
 	{
@@ -289,6 +308,8 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 				mResourceComponent->mResources[2] >= mSuspensionT1Costs[2] && mResourceComponent->mResources[3] >= mSuspensionT1Costs[3])
 			{
 				Unlock(i, j);
+				mResourceComponent->MinusResources(mSuspensionT1Costs[0], mSuspensionT1Costs[1], mSuspensionT1Costs[2], mSuspensionT1Costs[3]);
+
 			}
 
 			else
@@ -303,6 +324,8 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 				mResourceComponent->mResources[2] >= mSuspensionT2Costs[2] && mResourceComponent->mResources[3] >= mSuspensionT2Costs[3])
 			{
 				Unlock(i, j);
+				mResourceComponent->MinusResources(mSuspensionT2Costs[0], mSuspensionT2Costs[1], mSuspensionT2Costs[2], mSuspensionT2Costs[3]);
+
 			}
 
 			else
@@ -317,6 +340,7 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 				mResourceComponent->mResources[2] >= mSuspensionT3Costs[2] && mResourceComponent->mResources[3] >= mSuspensionT3Costs[3])
 			{
 				Unlock(i, j);
+				mResourceComponent->MinusResources(mSuspensionT3Costs[0], mSuspensionT3Costs[1], mSuspensionT3Costs[2], mSuspensionT3Costs[3]);
 			}
 
 			else
@@ -325,9 +349,10 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			}
 		}
 	}
+	*/
 
 	//engine
-	if (i == 0)
+	if (i == 3)
 	{
 		//compare the chassis cost to the resourceComponent mResources.
 		if (j == 0)
@@ -335,6 +360,8 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mEngineT0Costs[0] && mResourceComponent->mResources[1] >= mEngineT0Costs[1] ||
 				mResourceComponent->mResources[2] >= mEngineT0Costs[2] && mResourceComponent->mResources[3] >= mEngineT0Costs[3])
 			{
+				mResourceComponent->MinusResources(mEngineT0Costs[0], mEngineT0Costs[1], mEngineT0Costs[2], mEngineT0Costs[3]);
+
 				Unlock(i, j);
 			}
 
@@ -349,7 +376,10 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mEngineT1Costs[0] && mResourceComponent->mResources[1] >= mEngineT1Costs[1] ||
 				mResourceComponent->mResources[2] >= mEngineT1Costs[2] && mResourceComponent->mResources[3] >= mEngineT1Costs[3])
 			{
+				mResourceComponent->MinusResources(mEngineT1Costs[0], mEngineT1Costs[1], mEngineT1Costs[2], mEngineT1Costs[3]);
+
 				Unlock(i, j);
+
 			}
 
 			else
@@ -363,6 +393,10 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mEngineT2Costs[0] && mResourceComponent->mResources[1] >= mEngineT2Costs[1] ||
 				mResourceComponent->mResources[2] >= mEngineT2Costs[2] && mResourceComponent->mResources[3] >= mEngineT2Costs[3])
 			{
+				mResourceComponent->MinusResources(mEngineT2Costs[0], mEngineT2Costs[1], mEngineT2Costs[2], mEngineT2Costs[3]);
+
+				UE_LOG(LogTemp, Warning, TEXT("Can Unlock :D"));
+
 				Unlock(i, j);
 			}
 
@@ -377,6 +411,7 @@ void UUpgradeManagerComponent::CheckCost(int i, int j)
 			if (mResourceComponent->mResources[0] >= mEngineT3Costs[0] && mResourceComponent->mResources[1] >= mEngineT3Costs[1] ||
 				mResourceComponent->mResources[2] >= mEngineT3Costs[2] && mResourceComponent->mResources[3] >= mEngineT3Costs[3])
 			{
+				mResourceComponent->MinusResources(mEngineT3Costs[0], mEngineT3Costs[1], mEngineT3Costs[2], mEngineT3Costs[3]);
 				Unlock(i, j);
 			}
 
@@ -398,24 +433,32 @@ void UUpgradeManagerComponent::Unlock(int i, int j)
 	if (i == 0 && bChassisUnlocks[j] == false)
 	{
 		bChassisUnlocks[j] = true;
+		Equip(i, j);
+
 	}
 
 	//barrel
 	if (i == 1 && bBarrelUnlocks[j] == false)
 	{
 		bBarrelUnlocks[j] = true;
+		Equip(i, j);
+
 	}
 
 	//suspension
 	if (i == 2 && bSuspensionUnlocks[j] == false)
 	{
 		bSuspensionUnlocks[j] = true;
+		Equip(i, j);
+
 	}
 
 	//engine
 	if (i == 3 && bEngineUnlocks[j] == false)
 	{
 		bEngineUnlocks[j] = true;
+		Equip(i, j);
+
 	}
 
 	//now we can equip the new part
@@ -440,6 +483,29 @@ void UUpgradeManagerComponent::Equip(int i, int j)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("we got all our components :D"));
 
+		//chassis
+		if (i == 0)
+		{
+			mHealthComponent->SetMaxHealth(mChassisHealthAmounts[j]);
+			mHealthComponent->SetCurrentHealth(mChassisHealthAmounts[j]);
+		}
+
+		//turret
+		else if (i == 1)
+		{
+			mTankPawn->UpdateDamage(mBarrelDamageAmounts[j]);
+		}
+
+		//engine
+		else if (i == 3)
+		{
+			mTankPawn->UpdateSpeed(mEngineSpeedAmounts[j]);
+		}
+
+		//Update the stats shown in the garage widget
+		mTankPawn->UpdateGarageWidgetStats();
+
+		/*
 		//if we're changing the health, grab the health component and update the value
 		mHealthComponent->SetMaxHealth(1);
 		mHealthComponent->SetCurrentHealth(1);
@@ -453,7 +519,7 @@ void UUpgradeManagerComponent::Equip(int i, int j)
 
 		//if we're changing the damage, grab the tankpawn class and change its damage value.
 		mTankPawn->UpdateDamage(1);
-
+		*/
 		//if we're changing the fuel, grab the tankpawn and change the fuel amount.
 		//TBD
 	}

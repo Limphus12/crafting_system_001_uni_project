@@ -40,9 +40,12 @@ void ATankPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	Move();
-	RotateBody();
-	RotateTurretToMouseCursorLocation();
+	if (bCanMove)
+	{
+		Move();
+		RotateBody();
+		RotateTurretToMouseCursorLocation();
+	}
 }
 
 // Called to bind functionality to input
@@ -129,17 +132,39 @@ void ATankPawn::RotateTurretToMouseCursorLocation()
 void ATankPawn::ToggleGarageWidget()
 {
 	bGarageWidget = !bGarageWidget;
+	bCanMove = !bCanMove;
+	bCanShoot = !bCanShoot;
 
 	if (bGarageWidget)
 	{
-		InitGarageWidget();
+		MoveToGarage();
 	}
 
 	else if (!bGarageWidget)
 	{
-		mGarageWidget->RemoveFromParent();
-		mGarageWidget = nullptr;
+		ReturnFromGarage();
 	}
+}
+
+void ATankPawn::MoveToGarage()
+{
+	InitGarageWidget();
+	mPlayerController->bShowMouseCursor = true;
+
+	FHitResult* hr = nullptr;
+
+	this->SetActorLocationAndRotation(mPlayerGarageLocation, mPlayerGarageRotation, false, hr, ETeleportType::None);
+}
+
+void ATankPawn::ReturnFromGarage()
+{
+	mGarageWidget->RemoveFromParent();
+	mGarageWidget = nullptr;
+	mPlayerController->bShowMouseCursor = false;
+
+	FHitResult* hr = nullptr;
+
+	this->SetActorLocationAndRotation(mPlayerReturnLocation, mPlayerReturnRotation, false, hr, ETeleportType::None);
 }
 
 void ATankPawn::InitGarageWidget()
@@ -153,21 +178,26 @@ void ATankPawn::InitGarageWidget()
 		mGarageWidget->AddToPlayerScreen();
 
 		//moved from initcomponents(), since this is called on compile, rather than at runtime.
-		check(mUpgradeComponent == nullptr);
-		mUpgradeComponent = this->FindComponentByClass<UUpgradeManagerComponent>();
+		if (mUpgradeComponent == nullptr)
+		{
+			mUpgradeComponent = this->FindComponentByClass<UUpgradeManagerComponent>();
+		}
 
 		if (mUpgradeComponent != nullptr)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Wu comp eheh"));
+			UE_LOG(LogTemp, Warning, TEXT("Wu comp eheh :D"));
 		}
 
 		else if (mUpgradeComponent == nullptr)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Nu comp wawa"));
+			UE_LOG(LogTemp, Warning, TEXT("Nu comp wawa D:"));
 		}
 
-
 		mGarageWidget->InitUpgradeComponent(mUpgradeComponent);
+
+		UpdateGarageWidgetStats();
+
+
 	}
 }
 
@@ -201,4 +231,21 @@ void ATankPawn::AddResources(int a, int b, int c, int d)
 void ATankPawn::MinusResources(int a, int b, int c, int d)
 {
 	mResourceComponent->MinusResources(a, b, c, d);
+}
+
+void ATankPawn::UpdateGarageWidgetStats()
+{
+	UHealthComponent* health = this->FindComponentByClass<UHealthComponent>();
+
+	if (health != nullptr)
+	{
+		mGarageWidget->UpdateStatsTextBlocks(health->GetMaxHealth(), mCurrentDamage, mMovementSpeed);
+	}
+
+	UResourceComponent* resources = this->FindComponentByClass<UResourceComponent>();
+
+	if (resources != nullptr)
+	{
+		mGarageWidget->UpdateComponentsTextBlocks(resources->mResources[0], resources->mResources[1], resources->mResources[2], resources->mResources[3]);
+	}
 }

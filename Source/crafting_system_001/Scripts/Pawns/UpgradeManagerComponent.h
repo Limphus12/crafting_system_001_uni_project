@@ -89,18 +89,18 @@ private:
 
 	//health - each tier totals to { 100, 250, 500, 1000 };
 	const float mChassisHealthAmounts[4] = { 90, 225, 450, 900 }; //major influence
-	const float mSuspensionHealthAmounts[4] = { 10, 25, 50, 100 }; //minor influence
+	//const float mSuspensionHealthAmounts[4] = { 10, 25, 50, 100 }; //minor influence
 
 	//damage - enemies will be balanced around these values (subject to change).
 	const float mBarrelDamageAmounts[4] = { 25, 62.5, 125, 250 }; //only influence - perhaps include tank turrets as a minor barrel damage influence?
 
 	//speed - default value was 1000, seems to be mid-tier
-	const float mEngineSpeedAmounts[4] = { 225, 450, 900, 2250 }; //major influence
-	const float mSuspensionSpeedAmounts[4] = { 25, 50, 100, 250 }; //minor influence
+	const float mEngineSpeedAmounts[4] = { 450, 900, 2250, 4500 }; //major influence
+	//const float mSuspensionSpeedAmounts[4] = { 50, 100, 250, 500 }; //minor influence
 
 	//fuel - currently do not know what to set these as... I mean this is only a 'if we have time' mechanic.
-	const float mTankFuelAmounts[4] = { 1, 1, 1, 1 }; //major influence
-	const float mEngineFuelAmounts[4] = { 1, 1, 1, 1 }; //minor influence
+	//const float mTankFuelAmounts[4] = { 1, 1, 1, 1 }; //major influence
+	//const float mEngineFuelAmounts[4] = { 1, 1, 1, 1 }; //minor influence
 
 
 

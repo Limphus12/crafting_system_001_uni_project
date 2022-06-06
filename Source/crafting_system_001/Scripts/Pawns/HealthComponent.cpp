@@ -42,7 +42,7 @@ void UHealthComponent::TakeDamage(AActor* aDamagedActor, float aDamage, const UD
 
 void UHealthComponent::RespawnPlayer(AActor* actor)
 {
-	//teleport player back to garage
+	//teleport player back to center
 	FHitResult* hr = nullptr;
 
 	actor->SetActorLocationAndRotation(UHealthComponent::mPlayerRespawnLocation, UHealthComponent::mPlayerRespawnRotation, false, hr, ETeleportType::None);
@@ -82,4 +82,14 @@ void UHealthComponent::SetCurrentHealth(float i)
 void UHealthComponent::SetMaxHealth(float i)
 {
 	mMaxHealth = i;
+}
+
+float UHealthComponent::GetCurrentHealth()
+{
+	return mCurrentHealth;
+}
+
+float UHealthComponent::GetMaxHealth()
+{
+	return mMaxHealth;
 }

@@ -38,7 +38,11 @@ public:
 		int mResourceAmounts[4] = { 10, 10, 10, 10 };
 
 	void UpdateDamage(float amount);
-	float mCurrentDamage = 50.0f; //used to store damage value.
+	float GetDamage();
+	float mCurrentDamage = 25.0f; //used to store damage value.
+
+	bool bCanShoot = true;
+
 
 protected:
 	void BeginPlay() override;

@@ -37,6 +37,20 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void UpdateGarageWidgetStats();
+
+	UPROPERTY(EditAnywhere, Category = "Garage")
+		FVector mPlayerGarageLocation;
+
+	UPROPERTY(EditAnywhere, Category = "Garage")
+		FQuat mPlayerGarageRotation;
+
+	UPROPERTY(EditAnywhere, Category = "Garage")
+		FVector mPlayerReturnLocation;
+
+	UPROPERTY(EditAnywhere, Category = "Garage")
+		FQuat mPlayerReturnRotation;
+
 protected:
 	void BeginPlay() override;
 	
@@ -49,6 +63,9 @@ private:
 	void InitGarageWidget();
 	void ToggleGarageWidget();
 
+	void MoveToGarage();
+	void ReturnFromGarage();
+
 	void CalculateMovementInput(const float aValue);
 	void CalculateRotationInput(const float aValue);
 
@@ -56,6 +73,7 @@ private:
 	void RotateBody();
 
 	void RotateTurretToMouseCursorLocation();
+
 
 
 	APlayerController* mPlayerController = nullptr;
@@ -118,5 +136,5 @@ private:
 		class UGarageWidget* mGarageWidget = nullptr;
 
 	bool bGarageWidget = false;
-	
+	bool bCanMove = true;
 };

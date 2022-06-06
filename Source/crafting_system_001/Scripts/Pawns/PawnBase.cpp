@@ -2,6 +2,8 @@
 #include "Components/CapsuleComponent.h"
 #include "crafting_system_001/Scripts/Actors/ProjectileBase.h"
 #include "crafting_system_001/Scripts/Actors/ResourceTriggerBox.h"
+#include <Runtime/Engine/Classes/Kismet/GameplayStatics.h>
+#include <crafting_system_001/Scripts/Pawns/TankPawn.h>
 
 // Sets default values
 APawnBase::APawnBase()
@@ -32,7 +34,10 @@ void APawnBase::RotateTurret(const FVector& aLookAtTargetLocation)
 
 void APawnBase::Fire()
 {
-	SpawnProjectile();
+	if (bCanShoot)
+	{
+		SpawnProjectile();
+	}
 }
 
 void APawnBase::HandleDestruction()
@@ -56,6 +61,8 @@ void APawnBase::HandleDestruction()
 
 void APawnBase::SpawnResources()
 {
+	//we're getting rid of this resource trigger box thingy, just give teh player its resources lmao.
+	/*
 	FVector mSpawnLocation = GetActorLocation();
 	FRotator mSpawnRotation = GetActorRotation();
 
@@ -66,6 +73,31 @@ void APawnBase::SpawnResources()
 		//artb->SetTestResourceAmount(mTestResourceAmount);
 		artb->SetResourceAmounts(mResourceAmounts[0], mResourceAmounts[1], mResourceAmounts[2], mResourceAmounts[3]);
 	}
+	*/
+
+	//UE_LOG(LogTemp, Warning, TEXT("attempting to spawning resources"));
+
+
+	//find the player in the world
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATankPawn::StaticClass(), FoundActors);
+
+	if (FoundActors.Num() > 0)
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("found tank actor"));
+
+
+		ATankPawn* player = Cast<ATankPawn>(FoundActors[0]);
+
+		//if we get the player, add resources :D
+		if (player != nullptr)
+		{
+			//UE_LOG(LogTemp, Warning, TEXT("found player :DDDD, adding resources :D"));
+
+			player->AddResources(mResourceAmounts[0], mResourceAmounts[1], mResourceAmounts[2], mResourceAmounts[3]);
+		}
+	}
+	
 }
 
 void APawnBase::StartTimer()
@@ -169,4 +201,9 @@ void APawnBase::SpawnProjectile()
 void APawnBase::UpdateDamage(float amount)
 {
 	mCurrentDamage = amount;
+}
+
+float APawnBase::GetDamage()
+{
+	return mCurrentDamage;
 }

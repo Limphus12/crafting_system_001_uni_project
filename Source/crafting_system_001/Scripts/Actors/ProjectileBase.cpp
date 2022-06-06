@@ -49,7 +49,7 @@ void AProjectileBase::OnHit(UPrimitiveComponent* aHitComponent,
 	{
 		UGameplayStatics::ApplyDamage(aOtherActor, mDamage, owner->GetInstigatorController(), this, mDamageType);
 
-		//UE_LOG(LogTemp, Warning, TEXT("Dealt Damage"));
+		UE_LOG(LogTemp, Warning, TEXT("Dealt Damage"));
 	}
 
 	Destroy();
@@ -57,5 +57,7 @@ void AProjectileBase::OnHit(UPrimitiveComponent* aHitComponent,
 
 void AProjectileBase::SetDamage(float amount)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Setting Damage"));
+
 	mDamage = amount;
 }

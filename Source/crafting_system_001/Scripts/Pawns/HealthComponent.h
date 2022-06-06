@@ -30,6 +30,8 @@ public:
 	void ResetHealth();
 
 
+	float GetCurrentHealth();
+	float GetMaxHealth();
 
 protected:
 	// Called when the game starts

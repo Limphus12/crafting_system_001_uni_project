@@ -57,7 +57,7 @@ void UResourceComponent::MinusResources(int a, int b, int c, int d)
 
 	if ((mResources[0] - a) < 0 || (mResources[1] - b) < 0 || (mResources[2] - c) < 0 || (mResources[3] - d) < 0)
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("cannot minus test resource - value would fall below 0"));
+		UE_LOG(LogTemp, Warning, TEXT("cannot minus  resource - value would fall below 0"));
 	}
 
 	if ((mResources[0] - a) >= 0)
