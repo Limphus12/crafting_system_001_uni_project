@@ -206,7 +206,7 @@ void ATankPawn::InitComponents()
 	}
 
 
-	/*
+	
 	//grab all the materials that we need
 
 	//chassis common materials
@@ -231,8 +231,6 @@ void ATankPawn::InitComponents()
 		ChassisMaterials[2] = ChassisMaterial02.Object;
 		ChassisMaterials[3] = ChassisMaterial03.Object;
 	}
-	*/
-
 }
 
 void ATankPawn::InitPlayerController()
@@ -410,21 +408,19 @@ void ATankPawn::UpdateMesh(int i, int j)
 	{
 		mBaseMesh->SetStaticMesh(ChassisMeshes[j]);
 
-		/*
 		if (j == 1)
 		{
-			//mBaseMesh->SetMaterial(0, ChassisMaterialWheels);
-			//mBaseMesh->SetMaterial(1, ChassisMaterialTreads);
-			//mBaseMesh->SetMaterial(2, ChassisMaterials[j]);
+			mBaseMesh->SetMaterial(0, ChassisMaterialWheels);
+			mBaseMesh->SetMaterial(1, ChassisMaterialTreads);
+			mBaseMesh->SetMaterial(2, ChassisMaterials[j]);
 		}
 
 		else if (j == 2 || j == 3)
 		{
-			//mBaseMesh->SetMaterial(0, ChassisMaterials[j]);
-			//mBaseMesh->SetMaterial(1, ChassisMaterialWheels);
-			//mBaseMesh->SetMaterial(2, ChassisMaterialTreads);
+			mBaseMesh->SetMaterial(0, ChassisMaterials[j]);
+			mBaseMesh->SetMaterial(1, ChassisMaterialWheels);
+			mBaseMesh->SetMaterial(2, ChassisMaterialTreads);
 		}
-		*/
 	}
 
 	//turret and barrel

@@ -157,10 +157,10 @@ private:
 
 
 	//materials
-		//class UMaterial* ChassisMaterialTreads;
-		//class UMaterial* ChassisMaterialWheels;
+		class UMaterial* ChassisMaterialTreads;
+		class UMaterial* ChassisMaterialWheels;
 
-		//class UMaterial* ChassisMaterials[4];
+		class UMaterial* ChassisMaterials[4];
 		
 
 };
